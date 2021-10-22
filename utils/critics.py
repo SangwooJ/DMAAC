@@ -28,6 +28,9 @@ class AttentionCritic(nn.Module):
         self.attend_heads = attend_heads
 
         self.critic_encoders = nn.ModuleList()
+        # added to add another layer after s_encoder
+        self.critic_encoders2 = nn.ModuleList()
+
         self.critics = nn.ModuleList()
 
         self.state_encoders = nn.ModuleList()
