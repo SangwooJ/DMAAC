@@ -1,3 +1,10 @@
+# MAAC modification by SangwooJ
+Modification of Original MAAC code to improve performance
+
+
+
+
+---------------------------------------
 # Multi-Actor-Attention-Critic
 Code for [*Actor-Attention-Critic for Multi-Agent Reinforcement Learning*](https://arxiv.org/abs/1810.02912) (Iqbal and Sha, ICML 2019)
 
