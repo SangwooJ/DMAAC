@@ -39,12 +39,20 @@ class AttentionCritic(nn.Module):
             idim = sdim + adim
             odim = adim
             encoder = nn.Sequential()
+            # added to add another layer after s_encoder
+            encoder2 = nn.Sequential()
             if norm_in:
                 encoder.add_module('enc_bn', nn.BatchNorm1d(idim,
                                                             affine=False))
             encoder.add_module('enc_fc1', nn.Linear(idim, hidden_dim))
             encoder.add_module('enc_nl', nn.LeakyReLU())
             self.critic_encoders.append(encoder)
+            # added to add another layer after s_encoder
+
+            encoder2.add_module('enc_fc1', nn.Linear(hidden_dim, hidden_dim))
+            encoder2.add_module('enc_nl', nn.LeakyReLU())
+            self.critic_encoders.append(encoder2)
+            
             critic = nn.Sequential()
             critic.add_module('critic_fc1', nn.Linear(2 * hidden_dim,
                                                       hidden_dim))
