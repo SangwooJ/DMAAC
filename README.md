@@ -10,8 +10,7 @@ This work was presented in [IVCI 4.0 2022](https://chennai.vit.ac.in/files/ivc20
 <img src="etc/typeA.png"  width="500" height="300">
 <img src="etc/typeB.png"  width="500" height="300">
 
-- Proposed models outperform MAAC in (Cooperative treasure collections)[https://github.com/shariqiqbal2810/MAAC/blob/master/envs/mpe_scenarios/fullobs_collect_treasure.py]
-
+- Proposed models outperform MAAC in [Cooperative treasure collections](https://github.com/shariqiqbal2810/MAAC/blob/master/envs/mpe_scenarios/fullobs_collect_treasure.py)
 
 ## Requirements (from [MAAC](https://github.com/shariqiqbal2810/MAAC))
 * Python 3.6.1 (Minimum)
