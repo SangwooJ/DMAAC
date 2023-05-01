@@ -1,52 +1,18 @@
-# MAAC modification by SangwooJ
-Modification of Original [MAAC](https://github.com/shariqiqbal2810/MAAC) code to improve performance
-
-
+# Dissimialrity Multi-Actor-Attention-Critic
+Modification of Original [MAAC](https://github.com/shariqiqbal2810/MAAC) by adding Dissimialrity Layer to improve performance
+This work was presented in [IVCI 4.0 2022](https://chennai.vit.ac.in/files/ivc2022/) and will be publisehd in [LNEE Springer](https://www.springer.com/series/7818)
 
 
 ---------------------------------------
-# Multi-Actor-Attention-Critic
-Code for [*Actor-Attention-Critic for Multi-Agent Reinforcement Learning*](https://arxiv.org/abs/1810.02912) (Iqbal and Sha, ICML 2019)
 
-## Requirements
+
+
+
+## Requirements (from [MAAC](https://github.com/shariqiqbal2810/MAAC))
 * Python 3.6.1 (Minimum)
 * [OpenAI baselines](https://github.com/openai/baselines), commit hash: 98257ef8c9bd23a24a330731ae54ed086d9ce4a7
-* My [fork](https://github.com/shariqiqbal2810/multiagent-particle-envs) of Multi-agent Particle Environments
-* [PyTorch](http://pytorch.org/), version: 0.3.0.post4
-* [OpenAI Gym](https://github.com/openai/gym), version: 0.9.4
-* [Tensorboard](https://github.com/tensorflow/tensorboard), version: 0.4.0rc3 and [Tensorboard-Pytorch](https://github.com/lanpa/tensorboard-pytorch), version: 1.0 (for logging)
+* [fork](https://github.com/shariqiqbal2810/multiagent-particle-envs) of Multi-agent Particle Environments
+* [PyTorch](http://pytorch.org/), version: 0.3.0.post4 -> v1.12.1 works
+* [OpenAI Gym](https://github.com/openai/gym), version: 0.9.4 -> version 0.15.7 works for me
+* [Tensorboard](https://github.com/tensorflow/tensorboard), version: 0.4.0rc3 and [Tensorboard-Pytorch](https://github.com/lanpa/tensorboard-pytorch), version: 1.0 (for logging). tensorboard 2.12.2 & tensorboardX 2.6 -> works for me
 
-The versions are just what I used and not necessarily strict requirements.
-
-## How to Run
-
-All training code is contained within `main.py`. To view options simply run:
-
-```shell
-python main.py --help
-```
-The "Cooperative Treasure Collection" environment from our paper is referred to as `fullobs_collect_treasure` in this repo, and "Rover-Tower" is referred to as `multi_speaker_listener`.
-
-In order to match our experiments, the maximum episode length should be set to 100 for Cooperative Treasure Collection and 25 for Rover-Tower.
-
-## Citing our work
-
-If you use this repo in your work, please consider citing the corresponding paper:
-
-```bibtex
-@InProceedings{pmlr-v97-iqbal19a,
-  title =    {Actor-Attention-Critic for Multi-Agent Reinforcement Learning},
-  author =   {Iqbal, Shariq and Sha, Fei},
-  booktitle =    {Proceedings of the 36th International Conference on Machine Learning},
-  pages =    {2961--2970},
-  year =     {2019},
-  editor =   {Chaudhuri, Kamalika and Salakhutdinov, Ruslan},
-  volume =   {97},
-  series =   {Proceedings of Machine Learning Research},
-  address =      {Long Beach, California, USA},
-  month =    {09--15 Jun},
-  publisher =    {PMLR},
-  pdf =      {http://proceedings.mlr.press/v97/iqbal19a/iqbal19a.pdf},
-  url =      {http://proceedings.mlr.press/v97/iqbal19a.html},
-}
-```
