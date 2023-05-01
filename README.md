@@ -1,6 +1,6 @@
 # Dissimialrity Multi-Actor-Attention-Critic
-Modification of Original [MAAC](https://github.com/shariqiqbal2810/MAAC) by adding Dissimialrity Layer to improve performance
-This work was presented in [IVCI 4.0 2022](https://chennai.vit.ac.in/files/ivc2022/) and will be publisehd in [LNEE Springer](https://www.springer.com/series/7818)
+- Modification of Original [MAAC](https://github.com/shariqiqbal2810/MAAC) by adding Dissimialrity Layer to improve performance
+- This work was presented in [IVCI 4.0 2022](https://chennai.vit.ac.in/files/ivc2022/) and will be publisehd in [LNEE Springer](https://www.springer.com/series/7818)
 
 
 ---------------------------------------
