@@ -33,7 +33,7 @@ class AttentionCritic(nn.Module):
         self.state_encoders = nn.ModuleList()
 
         #added for cosdis
-        self.cosdis = nn.Linear(hidden_dim, hidden_dim // 2)
+        #self.cosdis = nn.Linear(hidden_dim, hidden_dim // 2)
 
         # iterate over agents
         for sdim, adim in sa_sizes:
@@ -47,7 +47,7 @@ class AttentionCritic(nn.Module):
             encoder.add_module('enc_nl', nn.LeakyReLU())
             self.critic_encoders.append(encoder)
             critic = nn.Sequential()
-            critic.add_module('critic_fc1', nn.Linear((2 * hidden_dim) + (hidden_dim // 2),
+            critic.add_module('critic_fc1', nn.Linear((2 * hidden_dim) + (hidden_dim),
                                                       hidden_dim)) #fixed
             critic.add_module('critic_nl', nn.LeakyReLU())
             critic.add_module('critic_fc2', nn.Linear(hidden_dim, odim))
@@ -157,9 +157,7 @@ class AttentionCritic(nn.Module):
                 cos_dis = cos_dis + (val * sa_encodings[i])
             cos_dis_list.append(cos_dis)
 
-        cos_dis_layer_out_all = []
-        for i in range(len(agents)):
-            cos_dis_layer_out_all.append(self.cosdis(cos_dis_list[i])) #out 1024*32
+
         # print(cos_dis_layer_out_all[0].size())
 
         # calculate Q per agent
@@ -168,7 +166,7 @@ class AttentionCritic(nn.Module):
             head_entropies = [(-((probs + 1e-8).log() * probs).squeeze().sum(1)
                                .mean()) for probs in all_attend_probs[i]]
             agent_rets = []
-            critic_in = torch.cat((s_encodings[i], *other_all_values[i], cos_dis_layer_out_all[i]), dim=1)
+            critic_in = torch.cat((s_encodings[i], *other_all_values[i], cos_dis_list[i]), dim=1)
             all_q = self.critics[a_i](critic_in)
             int_acs = actions[a_i].max(dim=1, keepdim=True)[1]
             q = all_q.gather(1, int_acs)
