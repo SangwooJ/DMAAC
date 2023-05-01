@@ -33,7 +33,7 @@ class AttentionCritic(nn.Module):
         self.state_encoders = nn.ModuleList()
 
         #added for cosdis
-        self.cosdis = nn.Linear(hidden_dim, hidden_dim // 2)
+        self.cosdis = nn.Linear(self.nagents * hidden_dim, hidden_dim)
 
         # iterate over agents
         for sdim, adim in sa_sizes:
@@ -47,7 +47,7 @@ class AttentionCritic(nn.Module):
             encoder.add_module('enc_nl', nn.LeakyReLU())
             self.critic_encoders.append(encoder)
             critic = nn.Sequential()
-            critic.add_module('critic_fc1', nn.Linear((2 * hidden_dim) + (hidden_dim // 2),
+            critic.add_module('critic_fc1', nn.Linear((3 * hidden_dim),
                                                       hidden_dim)) #fixed
             critic.add_module('critic_nl', nn.LeakyReLU())
             critic.add_module('critic_fc2', nn.Linear(hidden_dim, odim))
@@ -106,7 +106,12 @@ class AttentionCritic(nn.Module):
                                                  are logged
         """
         if agents is None:
-            agents = range(len(self.critic_encoders))
+            agents = range(len(self.
+                               
+                               
+                               
+                               
+                               _encoders))
         states = [s for s, a in inps]
         actions = [a for s, a in inps]
         
@@ -149,17 +154,23 @@ class AttentionCritic(nn.Module):
         # calculate cos dissimilarity
         cos = nn.CosineSimilarity(dim=1, eps=1e-6)
         cos_dis_list = []
-        for i in range(len(agents)): #num of agen
-            cos_dis = 0
-            for j in range(len(agents)): # cos_dis of i and js
+        for i in range(self.nagents): #num of agen
+            cos_dis = []
+            for j in range(self.nagents): # cos_dis of i and js
                 val = cos(sa_encodings[i],sa_encodings[j]).unsqueeze(1)* -1
                 val[val < 0] = 0 
-                cos_dis = cos_dis + (val * sa_encodings[i])
+                cos_dis.append(val)
             cos_dis_list.append(cos_dis)
 
+        cos_dis_layer_in_all = []
+        for i in range(self.nagents):
+            cos_dis_layer_in = torch.cat((cos_dis_list[i][0] * sa_encodings[0], cos_dis_list[i][1] * sa_encodings[1], cos_dis_list[i][2] * sa_encodings[2],
+                cos_dis_list[i][3] * sa_encodings[3], cos_dis_list[i][4] * sa_encodings[4], cos_dis_list[i][5] * sa_encodings[5], cos_dis_list[i][6] * sa_encodings[6], cos_dis_list[i][7] * sa_encodings[7]), dim=1)
+            cos_dis_layer_in_all.append(cos_dis_layer_in)
+        # print(cos_dis_layer_in_all[0].size()) 
         cos_dis_layer_out_all = []
-        for i in range(len(agents)):
-            cos_dis_layer_out_all.append(self.cosdis(cos_dis_list[i])) #out 1024*32
+        for i in range(self.nagents):
+            cos_dis_layer_out_all.append(self.cosdis(cos_dis_layer_in_all[i])) #out 1024*128
         # print(cos_dis_layer_out_all[0].size())
 
         # calculate Q per agent
