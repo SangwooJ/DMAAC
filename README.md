@@ -5,11 +5,6 @@ This work was presented in [IVCI 4.0 2022](https://chennai.vit.ac.in/files/ivc20
 
 
 
----------------------------------------
-
-
-
-
 ## Requirements (from [MAAC](https://github.com/shariqiqbal2810/MAAC))
 * Python 3.6.1 (Minimum)
 * [OpenAI baselines](https://github.com/openai/baselines), commit hash: 98257ef8c9bd23a24a330731ae54ed086d9ce4a7
